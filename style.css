@@ -1,0 +1,148 @@
+body{
+  background-color: #fff;
+}
+.todo{
+  width: 320px;
+  padding: 0 10px;
+  font-family: 'Microsoft JhengHei';
+  border-radius: 5px;
+  margin: 10px auto;
+}
+.todo>h1{
+  text-align: center;
+  margin: 8px 0 12px;
+  padding-bottom: 4px;
+  font-size: 28px;
+  font-weight: normal;
+  color: #68d;
+  border-bottom: 1px solid #ddd;
+}
+
+.todo-input{
+  text-align: center;
+}
+.todo-input input{
+  width: 280px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Microsoft JhengHei';
+  color: #336;
+}
+
+.item-input{
+  text-align: left;
+}
+.item-input .pokemonNm{
+  width: 130px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Microsoft JhengHei';
+  color: #336;
+  text-align: left;
+}
+
+.item-input .pokemonCv{
+  width: 50px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Microsoft JhengHei';
+  color: #336;
+  margin-left: 3px;
+  text-align: right;
+}
+button{
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #336;
+  margin-left: 10px;
+  box-shadow: 1px 1px #999;
+  text-align: right;
+}
+
+button:hover {background-color: #7e8482}
+
+button:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
+}
+
+.todo-list{
+  padding-left: 0;
+  list-style: none;
+}
+th.pokemonCv:hover{
+    cursor: pointer;
+}
+.head{
+    background-color: darkgray;
+}
+.pokemonNm{
+  float: left;
+  width: 130px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-family: 'Microsoft JhengHei';
+  text-align: center;
+}
+
+.pokemonCv{
+  float: left;
+  width: 50px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-family: 'Microsoft JhengHei';
+  margin-left: 3px;
+  text-align: center;
+}
+
+
+
+@keyframes show{
+  from{
+    opacity:0;
+    transform: translateY(-50px);
+  }
+  to{
+    opacity:1;
+    transform: none;
+  }
+}
+
+.todo-item{
+  border-bottom: 1px solid #ddd;
+  padding: 24px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color .3s;
+  animation: show .3s ease-in-out;
+}
+.todo-item:first-child{
+  border-top: 1px solid #ddd;
+}
+.todo-item:before{
+  vertical-align: middle;
+  margin-right: 24px;
+  content: url('img/check0.png');
+}
+.todo-item.done:before{
+  content: url('img/check1.png');
+}
+.todo-item.done{
+  text-decoration: line-through;
+  color: #888;
+  background-color: #f6f6f6;
+}
+.done{
+  text-decoration: line-through;
+  color: #888;
+  background-color: #f6f6f6;
+}
