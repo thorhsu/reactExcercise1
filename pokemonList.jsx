@@ -1,6 +1,6 @@
 //code here :)
 var todoListData = [
-    {id:1, pokemonNm: "picachu", pokemonCv: "4"}
+    {id:1, pokemonNm: "picachu", pokemonCp: "4"}
     ];
 
 
@@ -8,31 +8,33 @@ var PokemonInput = React.createClass({
   getInitialState: function(){
     return{
        pokemonNm: '',
-       pokemonCv:''
+       pokemonCp:''
     }  
   },
-  onChangeItem: function(e){
+  onChangeName: function(e){
       this.setState({
           pokemonNm: e.target.value
       });
   },
-  onChangePrice: function(e){
+  onChangeCp: function(e){
       this.setState({
-          pokemonCv: e.target.value
+          pokemonCp: e.target.value
       });
   },    
   onSubmit: function(e){
      e.preventDefault();
-     if(this.state.pokemonNm !== '' && this.state.pokemonCv !== '')
-        this.props.addPokemon(this.state.pokemonNm, this.state.pokemonCv);
+     if(this.state.pokemonNm !== '' && this.state.pokemonCp !== '')
+        this.props.addPokemon(this.state.pokemonNm, this.state.pokemonCp);
      {/*設定pokemon*/}
-     this.setState({pokemonNm: '', pokemonCv: ''});
+     this.setState({pokemonNm: '', pokemonCp: ''});
+     document.getElementById("pokemonNm").focus();
+     
   },
   render:function(){
     return (
         <form className="item-input">
-           <input type="text" className="pokemonNm" onChange={this.onChangeItem} value={this.state.pokemonNm} />      
-           <input type="text" className="pokemonCv" onChange={this.onChangePrice} value={this.state.pokemonCv} />
+           <input type="text" id="pokemonNm" className="pokemonNm" onChange={this.onChangeName} value={this.state.pokemonNm} />      
+           <input type="number" className="pokemonCp" onChange={this.onChangeCp} value={this.state.pokemonCp} />
            <button onClick={this.onSubmit}>增加</button>       
         </form>
     );
@@ -47,7 +49,7 @@ var Pokemon = React.createClass({
   render:function(){
     return (
       <tr>
-            <td className="pokemonNm">{this.props.name}</td><td className="pokemonCv">{this.props.cv}</td>
+            <td className="pokemonNm">{this.props.name}</td><td className="pokemonCp">{this.props.cp}</td>
             <td className="delete"><button onClick={this.onSubmit}>刪除</button></td>   
       </tr>
     );
@@ -80,12 +82,12 @@ var PokemonList = React.createClass({
             <div>
                <table className="todo-list">
                  <tr className="head">
-                     <th className="pokemonNm">Pokemon</th><th className="pokemonCv" onClick={this.sortPokemon} >CV&nbsp;<i className={this.state.directionIcon} aria-hidden="true"></i></th><th className="delete">Delete</th>
+                     <th className="pokemonNm">Pokemon</th><th className="pokemonCp" onClick={this.sortPokemon} >CP&nbsp;<i className={this.state.directionIcon} aria-hidden="true"></i></th><th className="delete">Delete</th>
                  </tr>
                    {
                      this.props.data.map(function(pokemon){
                          return(
-                            <Pokemon key={pokemon.id} name={pokemon.pokemonNm} id={pokemon.id} cv={pokemon.pokemonCv} deletePokemon={outClass.deletePokemon} />                    
+                            <Pokemon key={pokemon.id} name={pokemon.pokemonNm} id={pokemon.id} cp={pokemon.pokemonCp} deletePokemon={outClass.deletePokemon} />                    
                          );
                      })      
                    }
@@ -122,11 +124,11 @@ var AllPokemons = React.createClass({
       var dir = this.state.sortdir;
       if(dir === "desc"){
          data.sort(function(a, b){
-             return parseInt(b.pokemonCv) - parseInt(a.pokemonCv)
+             return parseInt(b.pokemonCp) - parseInt(a.pokemonCp)
          });
       }else{
          data.sort(function(a, b){
-             return parseInt(a.pokemonCv) - parseInt(b.pokemonCv)
+             return parseInt(a.pokemonCp) - parseInt(b.pokemonCp)
          });
       }
       return data;
@@ -144,11 +146,11 @@ var AllPokemons = React.createClass({
       this.state.data = data;
       this.forceUpdate();
   },
-  addPokemon: function(pokemonNm, pokemonCv){
+  addPokemon: function(pokemonNm, pokemonCp){
       var data= this.state.data.concat({
           id: Date.now(),
           pokemonNm: pokemonNm,
-          pokemonCv: pokemonCv
+          pokemonCp: pokemonCp
       });
       data = this.sortFunction(data);
       this.state.data = data;
@@ -157,7 +159,7 @@ var AllPokemons = React.createClass({
   render:function(){
     return (
       <div className="todo">
-        <h1>寶可夢CV排行榜</h1>
+        <h1>寶可夢CP排行榜</h1>
         <PokemonInput addPokemon={this.addPokemon}/>
         <PokemonList data={this.state.data} deletePokemon={this.deletePokemon} sortPokemon={this.sortPokemon} />
         
